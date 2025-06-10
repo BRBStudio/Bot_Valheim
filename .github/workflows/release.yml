@@ -32,10 +32,7 @@ jobs:
         run: git reset --hard && git clean -fd
 
       - name: Bump version
-        id: versioning
-        run: |
-          NEW_TAG=$(npm version patch -m "🔖 %s [skip ci]")
-          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+        run: npm version patch -m "🔖 %s [skip ci]"
 
       - name: Pull latest changes before pushing
         env:
@@ -44,7 +41,7 @@ jobs:
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git pull origin main --rebase
 
-      - name: Push version bump and tag
+      - name: Push changes and tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -53,7 +50,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.versioning.outputs.new_tag }}
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
