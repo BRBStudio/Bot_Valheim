@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -28,28 +26,31 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Clean working directory
-        run: git reset --hard && git clean -fd
-
-      - name: Bump version
-        run: npm version patch -m "🔖 %s [skip ci]"
-
-      - name: Pull latest changes before pushing
+      - name: Pull latest before bump
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git pull origin main --rebase
 
-      - name: Push changes and tags
+      - name: Bump version
+        id: bump
+        run: |
+          NEW_TAG=$(npm version patch -m "🔖 %s [skip ci]")
+          echo "new_tag=${NEW_TAG}" >> $GITHUB_ENV
+          echo "new_tag=${NEW_TAG}" >> $GITHUB_OUTPUT
+
+      - name: Push changes with tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin main --follow-tags
+          git push origin main
+          git push origin ${{ steps.bump.outputs.new_tag }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.bump.outputs.new_tag }}
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
