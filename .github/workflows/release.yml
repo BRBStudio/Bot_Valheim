@@ -1,3 +1,4 @@
+
 name: Auto Release Bot
 
 on:
@@ -20,13 +21,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Configure Git user
+      - name: Clean and prepare Git for version bump
         run: |
           git config --global user.email "ci@example.com"
           git config --global user.name "github-actions[bot]"
-
-      - name: Ensure clean working directory
-        run: git restore .
+          git reset --hard
+          git clean -fd
 
       - name: Bump version and commit
         id: bump_version
