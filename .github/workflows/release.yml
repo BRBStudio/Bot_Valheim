@@ -39,7 +39,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+          git pull origin main --rebase
           git push origin main --follow-tags
+          git push origin --tags
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
