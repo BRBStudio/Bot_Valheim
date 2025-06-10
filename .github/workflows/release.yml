@@ -1,0 +1,42 @@
+name: Auto Release Bot
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+            node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump version and commit
+        id: bump_version
+        run: |
+          VERSION=$(npm version patch -m "🔖 Bump version to %s [CI/CD auto]")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Push changes to repository
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump_version.outputs.version }}
+          name: Release ${{ steps.bump_version.outputs.version }}
+          body: "🤖 Auto release triggered by push to main branch"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
