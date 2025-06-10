@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ảnh Thời Trang</title>
+    <style>
+        /* Định dạng cho khung chứa ảnh */
+        .image-box {
+            width: 300px;
+            height: 300px;
+            border: 2px solid #ccc; /* Đường viền quanh khung ảnh */
+            display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            overflow: hidden; /* Ẩn phần ảnh vượt ra ngoài khung */
+            margin: 20px; /* Khoảng cách giữa các khung ảnh */
+        }
+
+        /* Định dạng cho hình ảnh trong khung */
+        .image-box img {
+            max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng khung */
+            max-height: 100%; /* Đảm bảo hình ảnh không vượt quá chiều cao khung */
+            object-fit: cover; /* Giúp hình ảnh vừa vặn trong khung mà vẫn giữ nguyên tỉ lệ */
+        }
+
+        /* Định dạng cho gallery theo dạng grid */
+        .gallery {
+            display: grid; /* Sử dụng grid layout */
+            grid-template-columns: repeat(5, 1fr); /* 6 cột, mỗi cột chiếm 1 phần của chiều rộng */
+            gap: 20px; /* Khoảng cách giữa các khung ảnh */
+            margin: 20px 0; /* Khoảng cách giữa các hàng ảnh */
+        }
+
+        /* Định dạng cho modal phóng to ảnh */
+        .modal {
+            display: none; /* Ẩn modal mặc định */
+            position: fixed; /* Cố định modal trên màn hình */
+            z-index: 1000; /* Đặt modal lên trên tất cả các phần tử khác */
+            left: 0; /* Canh trái của modal với màn hình */
+            top: 0; /* Canh trên của modal với màn hình */
+            width: 100%; /* Modal chiếm toàn bộ chiều ngang màn hình */
+            height: 100%; /* Modal chiếm toàn bộ chiều cao màn hình */
+            background-color: rgba(0, 0, 0, 0.8); /* Nền đen mờ cho modal */
+            justify-content: center; /* Căn giữa ảnh trong modal theo chiều ngang */
+            align-items: center; /* Căn giữa ảnh trong modal theo chiều dọc */
+            flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+        }
+
+        /* Định dạng cho ảnh phóng to trong modal */
+        .modal img {
+            max-width: 90%; /* Giới hạn chiều rộng tối đa của ảnh trong modal */
+            max-height: 80%; /* Giới hạn chiều cao tối đa của ảnh trong modal */
+        }
+
+        /* Định dạng cho chú thích ảnh trong modal */
+        .caption {
+            color: 
+            rgb(255, 255, 255); /* Màu chữ cho chú thích */
+            margin-top: 10px; /* Khoảng cách giữa ảnh và chú thích */
+            text-align: center; /* Căn giữa chú thích */
+        }
+
+        /* Định dạng cho các nút đóng, chuyển ảnh trước/sau */
+        .close, .prev, .next {
+            color: rgb(255, 102, 0); /* Màu trắng cho văn bản, mũi tên chuyển hình ảnh*/
+            position: absolute; /* Cố định vị trí trên màn hình */
+            top: 50%; /* Đặt vị trí theo chiều dọc tại 50% màn hình */
+            background-color: rgba(0, 0, 0, 0.5); /* Nền đen mờ cho các nút */
+            padding: 10px; /* Khoảng cách bên trong nút */
+            cursor: pointer; /* Thay đổi con trỏ chuột khi rê vào */
+            font-size: 24px; /* Kích thước chữ cho các nút */
+            user-select: none; /* Không cho phép chọn văn bản trên các nút */
+        }
+
+        /* Vị trí cho nút đóng modal (góc trên bên phải) */
+        .close {
+            top: 10px; /* Cách mép trên màn hình 10px */
+            right: 20px; /* Cách mép phải màn hình 20px */
+        }
+
+        /* Vị trí cho nút chuyển ảnh trước */
+        .prev {
+            left: 10px; /* Đặt nút này bên trái */
+        }
+
+        /* Vị trí cho nút chuyển ảnh sau */
+        .next {
+            right: 10px; /* Đặt nút này bên phải */
+        }
+
+        /* Hiệu ứng khi rê chuột vào các nút */
+        .close:hover, .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Tăng độ mờ khi rê chuột */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tiêu đề của trang -->
+    <h1>Thư viện Hình ảnh - Thời Trang</h1>
+
+    <!-- Khu vực chứa các ảnh trong thư mục "images/fashion" -->
+    <div class="gallery">
+        <!-- Mỗi ảnh được đặt trong một khung .image-box -->
+        <div class="image-box">
+            <img src="/image/fashion/2.jpg" alt="Ảnh Thời Trang 1" onclick="openModal(0)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/3.jpg" alt="Ảnh Thời Trang 2" onclick="openModal(1)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/4.jpg" alt="Ảnh Thời Trang 3" onclick="openModal(2)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/5.jpg" alt="Ảnh Thời Trang 4" onclick="openModal(3)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/6.jpg" alt="Ảnh Thời Trang 5" onclick="openModal(4)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/7.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/8.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/9.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/10.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+        <div class="image-box">
+            <img src="/image/fashion/11.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+        
+        <!-- Tiếp tục cho tới hết 15 ảnh -->
+        <div class="image-box">
+            <img src="/image/fashion/12.jpg" alt="Ảnh Thời Trang 12" onclick="openModal(5)">
+        </div>
+    </div>
+
+    <!-- Modal phóng to ảnh -->
+    <div class="modal" id="modal">
+        <!-- Nút đóng modal -->
+        <span class="close" onclick="closeModal()">&times;</span>
+        <!-- Hình ảnh được phóng to trong modal -->
+        <img id="modalImage" src="">
+        <!-- Chú thích ảnh -->
+        <div id="caption" class="caption"></div>
+        <!-- Nút chuyển sang ảnh trước -->
+        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+        <!-- Nút chuyển sang ảnh sau -->
+        <span class="next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        // Hàm lấy giá trị của query parameter từ URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        // Lấy giá trị của category từ URL
+        const category = getQueryParam('category');
+    
+        // Mảng chứa đường dẫn của các ảnh trong từng danh mục
+        const imagesWedding = [
+            "/image/wedding/1.jpg",
+            "/image/wedding/2.jpg",
+            "/image/wedding/3.jpg",
+            // Thêm các ảnh khác của danh mục Ảnh Cưới
+        ];
+    
+        const imagesFashion = [
+            "/image/fashion/2.jpg",
+            "/image/fashion/3.jpg",
+            "/image/fashion/4.jpg",
+            "/image/fashion/5.jpg",
+            "/image/fashion/6.jpg",
+            "/image/fashion/7.jpg",
+            "/image/fashion/8.jpg",
+            "/image/fashion/9.jpg",
+            "/image/fashion/10.jpg",
+            "/image/fashion/11.jpg",
+            "/image/fashion/12.jpg"
+            // Thêm các ảnh khác của danh mục Ảnh Thời Trang
+        ];
+    
+        // Mảng chứa các chú thích tương ứng với từng ảnh
+        const captionsWedding = [
+            "Chú thích cho Ảnh Cưới 1",
+            "Chú thích cho Ảnh Cưới 2",
+            "Chú thích cho Ảnh Cưới 3",
+            // Thêm chú thích cho Ảnh Cưới
+        ];
+    
+        const captionsFashion = [
+            "Chú thích cho Ảnh Thời Trang 1",
+            "Chú thích cho Ảnh Thời Trang 2",
+            "Chú thích cho Ảnh Thời Trang 3",
+            "Chú thích cho Ảnh Thời Trang 4",
+            "Chú thích cho Ảnh Thời Trang 5",
+            "Chú thích cho Ảnh Thời Trang 6",
+            "Chú thích cho Ảnh Thời Trang 7",
+            "Chú thích cho Ảnh Thời Trang 8",
+            "Chú thích cho Ảnh Thời Trang 9",
+            "Chú thích cho Ảnh Thời Trang 10",
+            "Chú thích cho Ảnh Thời Trang 11",
+            "Chú thích cho Ảnh Thời Trang 12",
+            // Thêm chú thích cho Ảnh Thời Trang
+        ];
+    
+        // Chọn bộ ảnh dựa trên danh mục
+        let images = [];
+        let captions = [];
+        if (category === 'wedding') {
+            images = imagesWedding;
+            captions = captionsWedding;
+        } else if (category === 'fashion') {
+            images = imagesFashion;
+            captions = captionsFashion;
+        } else {
+            // Xử lý trường hợp không có danh mục hợp lệ
+            document.querySelector('.gallery').innerHTML = '<p>Không tìm thấy danh mục hình ảnh.</p>';
+        }
+    
+        // Hiển thị hình ảnh trong gallery
+        const galleryDiv = document.querySelector('.gallery');
+        galleryDiv.innerHTML = ''; // Xóa nội dung cũ (nếu có)
+        images.forEach((src, index) => {
+            const imageBox = document.createElement('div');
+            imageBox.className = 'image-box';
+            imageBox.innerHTML = `<img src="${src}" alt="Ảnh" onclick="openModal(${index})">`;
+            galleryDiv.appendChild(imageBox);
+        });
+    
+        // Giữ nguyên logic mở và đóng modal
+        let currentImageIndex = 0;
+    
+        function openModal(index) {
+            currentImageIndex = index;
+            document.getElementById('modalImage').src = images[currentImageIndex];
+            document.getElementById('caption').innerText = captions[currentImageIndex];
+            document.getElementById('modal').style.display = "flex";
+        }
+    
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
+    
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+            document.getElementById('modalImage').src = images[currentImageIndex];
+            document.getElementById('caption').innerText = captions[currentImageIndex];
+        }
+    
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+    
+</body>
+</html>

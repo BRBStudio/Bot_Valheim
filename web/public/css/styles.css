@@ -1,0 +1,130 @@
+/*
+                                            ĐỊNH DẠNG & LÀM ĐẸP TRANG WEB
+*/
+
+body {
+    font-family: Arial, sans-serif; /* Đặt phông chữ của toàn bộ trang là Arial, nếu không có thì sử dụng phông chữ sans-serif */
+    background-color: #80fdf354; /* Đặt màu nền của trang thành màu xanh lá cây sáng  #80fdf354*/
+    background-image: url('../image/fashion/9.jpg'); /* Chèn hình nền từ thư mục images */
+    background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ màn hình */
+    background-position: 30% center; /* Căn giữa hình nền center */
+    height: 190vh; /* Chiều cao 100% viewport */
+    width: 100vw; /* Chiều rộng 100% viewport */
+    text-align: center; /* Căn giữa nội dung của trang */
+    padding: 1px; /* Thêm khoảng cách 50px xung quanh nội dung trong body */
+}
+
+h1 {
+    color: #ff0000; /* Đặt màu chữ của tiêu đề h1 thành màu đỏ */
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1b1f29;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5f5c5c;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5f5c5c;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #5f5c5c;
+}
+
+ul {
+    list-style-type: none; /* Ẩn dấu chấm ở đầu danh mục */
+    padding: 0; /* Bỏ khoảng cách mặc định */
+    margin: 0; /* Bỏ lề mặc định */
+}
+
+/* Định dạng hàng nút điều hướng */
+.navbar {
+    overflow: hidden; /* Ẩn phần tràn nếu có */
+    text-align: center; /* Căn giữa các nút trong thanh điều hướng */
+}
+
+.navbar a {
+    float: none; /* Không sử dụng float để căn ngang */
+    display: inline-block; /* Hiển thị mỗi liên kết dưới dạng khối */
+    color: rgb(255, 255, 255); /* Màu chữ trắng */
+    text-align: center; /* Căn giữa văn bản trong nút */
+    padding: 14px 20px; /* Thêm khoảng cách bên trong nút */
+    text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+    margin: 0 10px; /* Thêm khoảng cách giữa các nút */
+    border-radius: 10px; /* Bo tròn góc nút */
+    border: 1px solid transparent; /* Thêm khung cho nút (mặc định trong suốt) */
+    font-size: 16px; /* Kích thước chữ mặc định của nút */
+}
+
+/* Màu nền riêng cho từng nút */
+.navbar .home {
+    background-color: #564caf; /* Màu nền cho nút Trang Chủ */
+    border-color: #ffffff; /* Thêm khung có màu giống với màu nền */
+}
+
+.navbar .support {
+    background-color: #f44336; /* Màu nền cho nút Hỗ Trợ */
+    border-color: #ffffff; /* Thêm khung có màu giống với màu nền */
+}
+
+.navbar .contact {
+    background-color: #008CBA; /* Màu nền cho nút Liên Hệ */
+    border-color: #ffffff; /* Thêm khung có màu giống với màu nền */
+}
+
+.navbar .about {
+    background-color: #ff9800; /* Màu nền cho nút Thông Tin Studio */
+    border-color: #ffffff; /* Thêm khung có màu giống với màu nền */
+}
+
+/* Hiệu ứng khi rê chuột qua */
+.navbar a:hover {
+    opacity: 0.8; /* Hiệu ứng mờ khi rê chuột qua */
+    border-color: #0308ff; /* Thay đổi màu khung khi rê chuột vào */
+}
+
+/* Định dạng đoạn trang trí hình ảnh */
+.image-container {
+    position: relative; /* Đặt vị trí tương đối cho container để chú thích có thể đặt chính xác */
+    display: inline-block; /* Đặt thành khối nội tuyến */
+}
+
+.studio-image {
+    width: 300px; /* Đặt chiều rộng cho hình ảnh */
+    height: auto; /* Chiều cao tự động điều chỉnh theo tỉ lệ */
+    border-radius: 10px; /* Bo tròn các góc của hình ảnh */
+    transition: opacity 0.3s ease; /* Hiệu ứng mờ dần khi di chuột */
+}
+
+/* Định dạng chữ chú thích */
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%); /* Dịch chuyển chữ chú thích để nó nằm giữa ảnh ban đầu */
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0; /* Ẩn chữ chú thích */
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Hiển thị chữ chú thích khi di chuột vào giữa ảnh */
+.image-container:hover .tooltip {
+    opacity: 1; /* Hiển thị chữ chú thích khi di chuột */
+}
+
+

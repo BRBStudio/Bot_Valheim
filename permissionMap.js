@@ -1,0 +1,70 @@
+// permissionMap.js dùng cho userinfo.js
+
+// Tạo bản đồ ánh xạ quyền hệ thống sang tên dễ hiểu hơn
+const permissionMap = {
+    "CreateInstantInvite": "Tạo liên kết mời",
+    "KickMembers": "Đuổi thành viên",
+    "BanMembers": "Cấm thành viên",
+    "Administrator": "Quản trị viên",
+    "ManageChannels": "Quản lý kênh",
+    "ManageGuild": "Quản lý máy chủ",
+    "AddReactions": "Thêm phản ứng",
+    "ViewAuditLog": "Xem nhật ký kiểm tra",
+    "PrioritySpeaker": "Người nói ưu tiên",
+    "Stream": "Phát trực tuyến",
+    "ViewChannel": "Xem kênh",
+    "SendMessages": "Gửi tin nhắn",
+    "SendTTSMessages": "Gửi tin nhắn TTS",
+    "ManageMessages": "Quản lý tin nhắn",
+    "EmbedLinks": "Nhúng liên kết",
+    "AttachFiles": "Đính kèm tệp",
+    "ReadMessageHistory": "Xem lịch sử tin nhắn",
+    "MentionEveryone": "Gọi mọi người",
+    "UseExternalEmojis": "Sử dụng biểu tượng cảm xúc bên ngoài",
+    "ViewGuildInsights": "Xem thông tin máy chủ",
+    "Connect": "Kết nối",
+    "Speak": "Nói",
+    "MuteMembers": "Tắt tiếng thành viên",
+    "DeafenMembers": "Chặn tiếng thành viên",
+    "MoveMembers": "Di chuyển thành viên",
+    "UseVAD": "Sử dụng VAD",
+    "ChangeNickname": "Thay đổi biệt danh",
+    "ManageNicknames": "Quản lý biệt danh",
+    "ManageRoles": "Quản lý vai trò",
+    "ManageWebhooks": "Quản lý webhook",
+    "ManageEmojisAndStickers": "Quản lý biểu tượng cảm xúc và nhãn dán",
+    "UseApplicationCommands": "Sử dụng lệnh ứng dụng",
+    "RequestToSpeak": "Yêu cầu nói",
+    "ManageEvents": "Quản lý sự kiện",
+    "ManageThreads": "Quản lý chủ đề",
+    "CreatePublicThreads": "Tạo chủ đề công khai",
+    "CreatePrivateThreads": "Tạo chủ đề riêng tư",
+    "UseExternalStickers": "Sử dụng nhãn dán bên ngoài",
+    "SendMessagesInThreads": "Gửi tin nhắn trong chủ đề",
+    "StartEmbeddedActivities": "Bắt đầu hoạt động nhúng",
+    "ModerateMembers": "Quản lý thành viên",
+    "UseEmbeddedActivities": "Sử dụng hoạt động nhúng",
+    "UseSoundboard": "Sử dụng bảng âm thanh",
+    "UseExternalSounds": "Sử dụng âm thanh bên ngoài",
+    "SendVoiceMessages": "Gửi tin nhắn thoại",
+    "SendPolls": "Gửi khảo sát",
+    "ManageGuildExpressions": "Quản lý biểu tượng máy chủ",
+    "UseScheduledEvents": "Sử dụng sự kiện đã lên lịch",
+    "ManageScheduledEvents": "Quản lý sự kiện đã lên lịch",
+    "ModerateChannels": "Quản lý kênh",
+    "ViewCreatorMonetizationAnalytics": "Xem phân tích kiếm tiền của người sáng tạo",
+    "CreateGuildExpressions": "Tạo biểu tượng máy chủ",
+    "CreateEvents": "Tạo sự kiện",
+    "UseExternalApps": "Sử dụng ứng dụng bên ngoài",
+    "ManagePermissions": "Quản lý quyền",
+    "ManageAutoModerationRules": "Quản lý quy tắc tự động hóa",
+    "ManageAutoModeration": "Quản lý tự động hóa"
+};
+
+module.exports = {
+    permissionMap,
+};
+
+
+
+  
