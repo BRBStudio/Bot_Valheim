@@ -1,6 +1,6 @@
 {
     "name": "brb_studio",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "Bot BRB Studio tùy chỉnh cho cộng đồng: quản lý thành viên, hỗ trợ game Valheim, hệ thống embed tiếng Việt thân thiện, các tính năng mở rộng thông minh và nhiều thứ khác.",
     "main": "index.js",
     "scripts": {
