@@ -25,7 +25,7 @@ module.exports = {
         } catch (error) {
             // console.error('❌ Lỗi khi xử lý interaction:', error);
             if (!interaction.replied && !interaction.deferred) {
-                await interaction.reply({ content: '⚠ Đã xảy ra lỗi khi xử lý. Bạn cần có quyền ***ADMIN***, vui lòng thử lại sau hoặc liên hệ với DEV.', ephemeral: true });
+                await interaction.reply({ content: '⚠ Đã xảy ra lỗi khi xử lý. Bot cần có mặt trong máy chủ này và có quyền ***ADMIN*** để hoạt động đầy đủ các chức năng, vui lòng thử lại sau hoặc liên hệ với NPT ( dùng lệnh /dev để xem chi tiết ).', ephemeral: true });
             }
         }
     },

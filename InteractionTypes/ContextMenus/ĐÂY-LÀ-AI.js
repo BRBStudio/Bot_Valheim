@@ -48,7 +48,7 @@ module.exports = {
                         .addFields({ name: "Bot?", value: botStatus, inline: false })
                         .addFields({ name: "Danh hiệu", value: badges || 'Không có', inline: false })
                         .addFields({ name: "Lời mời máy chủ", value: `${i}`, inline: false })
-                        .setFooter({ text: `Lệnh được yêu cầu bởi: ${interaction.user.username}` })
+                        .setFooter({ text: `Lệnh được yêu cầu bởi: ${interaction.member?.displayName || interaction.user.username}` })
                         .setImage(`https://i.imgur.com/9Ynp6ey.gif`)
                         .setTimestamp();
 

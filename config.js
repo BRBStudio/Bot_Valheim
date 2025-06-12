@@ -3,7 +3,7 @@ const { Guild } = require("discord.js");
 module.exports = {
 
     // PHIÊN BẢN BOT //
-    botVersion: "v1.0.18",
+    botVersion: "v1.0.19",
     
     // NGƯỜI DÙNG ĐẶC BIỆT //
     specialUsers: [`940104526285910046`, ],// `1215380543815024700` , `933544716883079278`

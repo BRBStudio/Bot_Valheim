@@ -2,30 +2,55 @@
 
 🎮 **Bot Discord chính thức của cộng đồng Valheim [BRB Studio]**, hỗ trợ quản lý người chơi, lệnh slash thông minh, embed tiếng Việt thân thiện và tích hợp nhiều tiện ích game hiện đại.
 
+> ⚠️ **Luu y:** Vui long **khong chinh sua bat ky file nao trong du an**, ngoai tru file `.env`, de tranh loi hoac xung dot khi cap nhat ve sau.
+
 ---
 
 ## 🚀 Tính năng nổi bật
 
 - Slash command trực quan (có gợi ý)
+- Lệnh tùy chỉnh
+- Cập nhật với Discord.js v14
 - Tạo embed nhanh bằng thư viện [embed-brb](https://www.npmjs.com/package/embed-brb)
 - Quản lý thành viên, ping hệ thống, kiểm tra trạng thái server
 - Tích hợp MongoDB để lưu dữ liệu người dùng, video, trạng thái
 - Hệ thống phát nhạc, nhận diện giọng nói, dịch tự động, tạo QR
 - Hỗ trợ mini-game, chống spam, và nhiều tính năng mở rộng
+- Vé
+- lệnh /cm bot để xem tất cả lệnh của bot
+- lệnh /cm new sẽ cho bạn biết về sử dụng lệnh mới, không phải lệnh slash cũng như lệnh tiền tố
+- Vai trò phản ứng
+- Quà tặng
+- Dễ sử dụng
+[x] Và nhiều hơn nữa
+[x] Bạn không muốn tự mình lưu trữ? [Hãy sử dụng bot công khai của chúng tôi](https://discord.com/oauth2/authorize?client_id=1319906655525277759&permissions=8&integration_type=0&scope=bot)
 
 ---
 
 ## 📦 Cài đặt
 
+### 0. Cap nhat khi co phien ban moi
+
+Khi du an duoc cap nhat tren GitHub (them lenh moi, sua loi, cai tien...), ban co the lay ban moi nhat nhu sau:
+
+```bash
+git pull origin main
+```
+> ⚠️ **Lưu ý:** Vui long **không chỉnh sửa bất kỳ file nào trong dự án**, ngoại trừ file `.env`, để tránh lỗi hoặc xung đột khi cập nhật phiên bản mới của tôi. Nếu bạn đã chỉnh sửa các file trong thư mục (trừ .env), có thể sẽ gặp lỗi xung đột khi chạy `git pull`
+
+## 0.1 Liên hệ & Hỗ trợ
+
+Nếu bạn gặp bất kỳ vấn đề nào khi sử dụng bot, vui lòng mở một Issue tại trang GitHub của dự án **hoặc** liên hệ trực tiếp với Admin qua [Discord của dev](https://discord.gg/s2ec8Y2uPa)
+
 ### 1. Clone dự án
 ```bash
-git clone https://github.com/yourusername/brb_studio_bot.git
-cd brb_studio_bot
+git clone https://github.com/BRBStudio/Bot_Valheim.git
+cd Bot_Valheim ( nếu có sự thay đổi và cần chạy lệnh npm install )
 ```
 
 ### 2. Cài dependencies
 ```bash
-npm install
+npm install ( nếu có sự thay đổi )
 ```
 
 ### 3. Cấu hình biến môi trường `.env`
@@ -44,6 +69,7 @@ MONGODB_URI=mongodb+srv://...
 
 ```bash
 node index.js
+node .
 ```
 
 ---

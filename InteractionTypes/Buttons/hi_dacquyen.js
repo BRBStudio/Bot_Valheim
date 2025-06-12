@@ -11,6 +11,24 @@ module.exports = {
     description: 'Gửi đặc quyền máy chủ cho người dùng mới sử dụng máy chủ Discord. nút ở lệnh /hi',
     async execute(interaction, client) {
     try {
+
+        // Ưu tiên tìm kênh 'quy_tắc'
+        let rulesChannel = interaction.guild.channels.cache.find(
+            channel => (channel.type === ChannelType.GuildText) && channel.name === 'đặc_quyền'
+        );
+        
+        // Nếu không tìm thấy kênh 'quy_tắc', tìm kênh 'rules'
+        if (!rulesChannel) {
+            rulesChannel = interaction.guild.channels.cache.find(
+            channel => (channel.type === ChannelType.GuildText) && channel.name === 'privileges'
+            );
+        }
+        
+        // Nếu không tìm thấy kênh nào, thông báo lỗi
+        if (!rulesChannel) {
+            return interaction.reply({ content: 'Không tìm thấy kênh Đặc Quyền hoặc Privileges!', ephemeral: true });
+        }
+        
         const perkembed = new EmbedBuilder()
                             .setTitle('__✿ ĐẶC QUYỀN MÁY CHỦ__')
                             .setThumbnail(interaction.guild.iconURL({ dynamic: true, size: 512 }))

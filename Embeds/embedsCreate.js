@@ -18,13 +18,14 @@ const createEmojiEmbed = async (interaction) => {
         .setDescription(`Bạn bị liệt vào danh sách đen và không thể sử dụng lệnh. Liên hệ ***${guildOwner.user.displayName}*** nếu điều này là sai`) // Liên hệ [Valheim Survival](https://discord.com/users/940104526285910046)
 }
 
-const createHiEmbed = (interaction) => {
+const createHiEmbed = (interaction, targetUser) => {
 
+    const targetName = targetUser.displayName || targetUser.username;
     return new EmbedBuilder()
         .setTitle(`TÔI LÀ ${interaction.client.user.username}!`)
         .setThumbnail(interaction.client.user.displayAvatarURL())
         .setDescription(
-            `Chào mừng đến với máy chủ **${interaction.guild.name}** của chúng tôi! Chúng tôi đã biến nơi đây thành sân chơi đúng nghĩa, ` +
+            `Chào mừng **${targetName}** đến với máy chủ **${interaction.guild.name}** của chúng tôi! Chúng tôi đã biến nơi đây thành sân chơi đúng nghĩa, ` +
             `nhưng chúng ta có thể vui chơi và được là chính mình! Bạn có thể trò chuyện, chơi hoặc làm bất cứ điều gì bạn muốn ở đây. ` +
             `Tôi hy vọng chúng ta có thể kết bạn lâu dài và vui vẻ cùng nhau!\n\n` +
             `Nếu bạn cần bất kỳ trợ giúp nào, hãy liên hệ với một trong các Admin để được hỗ trợ bằng cách sử dụng lệnh này: </admin:1172947009410437142> ` +

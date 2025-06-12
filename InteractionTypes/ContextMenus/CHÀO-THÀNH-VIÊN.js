@@ -1,84 +1,3 @@
-// const { ApplicationCommandType, PermissionsBitField, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-// const config = require(`../../config`)
-// const CommandStatus = require('../../schemas/Command_Status');
-// const { rowHi } = require("../../ButtonPlace/ActionRowBuilder");
-// const { createHiEmbed } = require(`../../Embeds/embedsCreate`);
-
-// module.exports = {
-//     data: {
-//         name: 'CHÀO THÀNH VIÊN',
-//         type: ApplicationCommandType.User,
-//     },
-//     async execute(interaction, client) {
-//         if (!interaction.isUserContextMenuCommand()) return;
-
-//         // Kiểm tra trạng thái của ngữ cảnh
-//         const commandStatus = await CommandStatus.findOne({ command: 'CHÀO THÀNH VIÊN' });
-
-//         // Nếu lệnh đang tắt, gửi thông báo và không thực hiện ngữ cảnh
-//         if (commandStatus && commandStatus.status === 'off') {
-//             return interaction.reply('ứng dụng (apps) này đã bị tắt, vui lòng thử lại sau.');
-//         }
-
-//         if (interaction.commandName === 'CHÀO THÀNH VIÊN') {
-
-//             // Đánh dấu tương tác để tránh lỗi "Ứng dụng không phản hồi"
-//             await interaction.deferReply({ ephemeral: true });
-
-//             // Kiểm tra xem bot có các quyền cần thiết hay không
-//             const botMember = interaction.guild.members.cache.get(client.user.id);
-//             const requiredPermissions = [
-//                 PermissionsBitField.Flags.SendMessages,
-//                 PermissionsBitField.Flags.EmbedLinks,
-//                 PermissionsBitField.Flags.UseExternalEmojis,
-//                 PermissionsBitField.Flags.SendMessagesInThreads,
-//                 PermissionsBitField.Flags.CreatePublicThreads,
-//                 PermissionsBitField.Flags.AddReactions
-//             ];
-
-//             if (!botMember.permissions.has(requiredPermissions)) {
-//                 // Gửi thông báo vào kênh nếu bot thiếu quyền
-//                 await interaction.channel.send({ content: config.BotPermissions });
-//                 // Xóa phản hồi đã trì hoãn
-//                 await interaction.deleteReply();
-//                 return;
-//             }
-
-//             // Kiểm tra xem người dùng có các quyền cần thiết hay không
-//             if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-//                 // Gửi thông báo vào kênh nếu người dùng không có quyền
-//                 await interaction.channel.send({ content: config.OwnerPermissions });
-//                 // Xóa phản hồi đã trì hoãn
-//                 await interaction.deleteReply();
-//                 return;
-//             }
-
-//         try {
-//                 const embed = createHiEmbed(interaction);
-
-//                 const row = rowHi(interaction);
-
-//                 // Gửi tin nhắn với hoặc không có nút
-//                 if (row) {
-//                     await interaction.channel.send({ embeds: [embed], components: [row] });
-//                 } else {
-//                     await interaction.channel.send({ embeds: [embed] });
-//                 }
-//                 // Xóa phản hồi đã trì hoãn
-//                 await interaction.deleteReply();
-//             } catch (error) {
-//                 console.error('Lỗi xử lý tương tác:', error);
-//                 // Xử lý lỗi nếu xảy ra
-//                 await interaction.channel.send({ content: 'Đã xảy ra lỗi khi gửi tin nhắn chúc mừng.' });
-//                 // Xóa phản hồi đã trì hoãn
-//                 await interaction.deleteReply();
-//             }
-//         }
-//     },
-// };
-
-
-
 const { ApplicationCommandType, PermissionsBitField } = require('discord.js');
 const config = require(`../../config`);
 const CommandStatus = require('../../schemas/Command_Status');
@@ -160,7 +79,8 @@ module.exports = {
 
             try {
                 // console.log("Tạo embed chào thành viên...");
-                const embed = createHiEmbed(interaction);
+                const targetUser = interaction.targetMember.user;
+                const embed = createHiEmbed(interaction, targetUser);
                 // console.log("Embed tạo thành công:", embed);
 
                 // console.log("Tạo hàng nút...");
